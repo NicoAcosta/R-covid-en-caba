@@ -29,16 +29,26 @@ fechaCriterio <- data$fecha_clasificacion
 fechaCriterio <- data$fecha_apertura_snvs
 
 
+# Plot customization
+
+customplot <- function(table) {
+  plot(table,
+       col = "#18588E",
+       lwd = 4
+       )
+}
+
+
 # Plots por barrios, comunas, edades
 
 barrio <- function(unBarrio) {
   table <- table(fechaCriterio [data$barrio == unBarrio] [data$clasificacion == "confirmado"] [data$fecha_apertura_snvs > "2020-03-01"] )
-  plot(table, col = "#18588E")
+  customplot(table)
 }
 
 comuna <- function(unaComuna) {
   table <- table(fechaCriterio [data$comuna == unaComuna] [data$clasificacion == "confirmado"] )
-  plot(table)
+  customplot(table)
 }
 
 barrioEdades <- function(unBarrio, edadMin, edadMax) {
@@ -48,7 +58,7 @@ barrioEdades <- function(unBarrio, edadMin, edadMax) {
                  [data$edad >= edadMin]
                  [data$edad <= edadMax]
   )
-  plot(table)
+  customplot(table)
 }
 
 comunaEdades <- function(unaComuna, edadMin, edadMax) {
@@ -58,7 +68,7 @@ comunaEdades <- function(unaComuna, edadMin, edadMax) {
                  [data$edad >= edadMin]
                  [data$edad <= edadMax]
   )
-  plot(table)
+  customplot(table)
 }
 
 edades <- function(edadMin, edadMax) {
@@ -67,7 +77,7 @@ edades <- function(edadMin, edadMax) {
                  [data$edad >= edadMin]
                  [data$edad <= edadMax]
   )
-  plot(table)
+  customplot(table)
 }
 
 edad <- function(unaEdad) {
@@ -75,5 +85,23 @@ edad <- function(unaEdad) {
                  [data$clasificacion == "confirmado"]
                  [data$edad == unaEdad]
   )
-  plot(table)
+  customplot(table)
 }
+
+
+# Clean
+
+#   Global Environment
+rm(list = ls())
+
+#   Plots
+dev.off(dev.list())
+
+
+
+
+# Abreviaturas
+
+dvt <- "VILLA DEVOTO"
+vdp <- "VILLA DEL PARQUE"
+plm <- "PALERMO"
