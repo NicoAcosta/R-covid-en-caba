@@ -8,6 +8,7 @@ data <- read.csv("https://cdn.buenosaires.gob.ar/datosabiertos/datasets/salud/ca
 data <- read.csv("/Users/nico/Downloads/casos_covid19.csv", TRUE)
 
 
+
 # Castear las fechas
 
 dateFromString <- function(string) {
@@ -15,11 +16,14 @@ dateFromString <- function(string) {
   return(date)
 }
 
+
+  
 data$fecha_apertura_snvs <- dateFromString(data$fecha_apertura_snvs)
 data$fecha_toma_muestra <- dateFromString(data$fecha_toma_muestra)
 data$fecha_clasificacion <- dateFromString(data$fecha_clasificacion)
 data$fecha_fallecimiento <- dateFromString(data$fecha_fallecimiento)
 data$fecha_alta <- dateFromString(data$fecha_alta)
+
 
 
 # Criterio de fecha (fecha de isopado o de clasificación)
@@ -29,14 +33,22 @@ fechaCriterio <- data$fecha_clasificacion
 fechaCriterio <- data$fecha_apertura_snvs
 
 
+
 # Plot customization
 
 customplot <- function(table) {
   plot(table,
        col = "#18588E",
-       lwd = 4
+       lwd = 4,
+       ylab = "Casos confirmados",
+       xlab = "Fecha de hisopado",
+       las = 2
        )
 }
+
+ts <- ts(table(data$fecha_toma_muestra))
+plot(ts)
+
 
 
 # Plots por barrios, comunas, edades
@@ -89,6 +101,7 @@ edad <- function(unaEdad) {
 }
 
 
+
 # Clean
 
 #   Global Environment
@@ -99,9 +112,11 @@ dev.off(dev.list())
 
 
 
-
 # Abreviaturas
 
 dvt <- "VILLA DEVOTO"
 vdp <- "VILLA DEL PARQUE"
 plm <- "PALERMO"
+
+
+
