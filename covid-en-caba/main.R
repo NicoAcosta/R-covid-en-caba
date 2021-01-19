@@ -50,11 +50,15 @@ ts <- ts(table(data$fecha_toma_muestra))
 plot(ts)
 
 
+caba <- function() {
+  table <- table(fechaCriterio [data$clasificacion == "confirmado"] [data$fecha_apertura_snvs > "2020-03-01"] )
+  customplot(table)
+}
 
 # Plots por barrios, comunas, edades
 
 barrio <- function(unBarrio) {
-  table <- table(fechaCriterio [data$barrio == unBarrio] [data$clasificacion == "confirmado"] [data$fecha_apertura_snvs > "2020-03-01"] )
+  table <- table(fechaCriterio [data$barrio == unBarrio] [data$clasificacion == "confirmado"] )
   customplot(table)
 }
 
