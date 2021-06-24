@@ -39,7 +39,7 @@ fechaCriterio <- data$fecha_apertura_snvs
 customplot <- function(table) {
   plot(table,
        col = "#18588E",
-       lwd = 4,
+       lwd = 1,
        ylab = "Casos confirmados",
        xlab = "Fecha de hisopado",
        las = 2
